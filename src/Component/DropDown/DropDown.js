@@ -1,51 +1,28 @@
-import React, { Component } from "react";
-import "bootstrap/dist/css/bootstrap.css";
-import "bootstrap/dist/js/bootstrap.js";
+import React from "react";
 
-import "../../Global.css";
-///movies api http://www.omdbapi.com/?apikey=b90ede8f&t=21+jump+street
-//import data
-import mockData from "../../Data/mockData";
+const DropDown = (props) => {
 
-class DropDown extends Component {
-  state = {
-    selectedValue: ""
-  };
-
-  handleDropDownChange = event => {
-    this.setState({
-      selectedValue: event.target.value
-    });
-  };
-
-  render() {
-    return (
-      <div class="dropdown">
-        <button
-          class="btn btn-secondary dropdown-toggle"
-          type="button"
-          id="dropdownMenuButton"
-          data-toggle="dropdown"
-          aria-haspopup="true"
-          aria-expanded="false"
-        >
-          {this.state.selectedValue ? this.state.selectedValue : "select"}
-        </button>
-        <div
-          class="dropdown-menu"
-          aria-labelledby="dropdownMenuButton"
-          onClick={this.handleDropDownChange}
-        >
-          {mockData &&
-            mockData.map(item => (
-              <option value={item.name} key={item.uid}>
-                {item.name}
-              </option>
-            ))}
-        </div>
+  return (
+    <div class="dropdown">
+      <button
+        class="btn btn-secondary dropdown-toggle"
+        type="button"
+        id="dropdownMenuButton"
+        data-toggle="dropdown"
+        aria-haspopup="true"
+        aria-expanded="false"
+      >
+        {}
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" onClick={props.getDropDownValue}>
+        {props.data.map((item) => (
+          <a class="dropdown-item" href="#">
+            {item}
+          </a>
+        ))}
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 export default DropDown;
