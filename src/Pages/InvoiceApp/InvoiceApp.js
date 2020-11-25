@@ -18,9 +18,9 @@ class InvoiceApp extends React.Component {
       studioName: null,
       managerName: null,
     },
-    checkStudio: false,
     inputValue: false,
     namePut: "",
+    renderNewForm: false,
   };
 
   //component Did Mount
@@ -101,21 +101,46 @@ class InvoiceApp extends React.Component {
     );
   };
 
+  //toggle table body
   renderTableBody = () => {
     let data = this.state.dataObj;
+    let tbodyItem = [];
+
     for (let item in data) {
-      let i = 1;
-      return (
+      let i = 0;
+      tbodyItem.push(
         <tr>
           <th scope="row">{i++}</th>
           <td>{item}</td>
           <td>{Object.values(data[item])}</td>
         </tr>
       );
+      i++;
     }
+    return tbodyItem;
+  };
+
+  // get value from child functional component
+
+  getvalueFromChildComponent = (value) => {
+    const x = value === "Yes" ? true : false;
+    let renderNewForm = x;
+    this.setState({
+      renderNewForm,
+    });
+  };
+
+  //add new vendor
+  addNewvendor = () => {
+    return (
+      <div>
+        <CreateNewVendor addButton={this.addButton} />
+      </div>
+    );
   };
 
   render() {
+    console.log("tes", this.state.renderNewForm);
     return (
       <div>
         <div>
@@ -135,6 +160,7 @@ class InvoiceApp extends React.Component {
               dataObj={this.state.dataObj}
               searchValue={this.inputValue}
               checkforValue={this.state.inputValue}
+              getvalueFromChildComponent={this.getvalueFromChildComponent}
               buttonText="Search"
               modalTitle="Confirm"
               modalBodyText={
@@ -146,15 +172,16 @@ class InvoiceApp extends React.Component {
           </div>
         </div>
         {this.studioNameWithLink()}
-        <div>
-          {this.state.checkVendorExistence && (
-            <CreateNewVendor addButton={this.addButton} />
-          )}
+        <div className="tableAndNewVendor">
+          <div className="tableWidth">
+            <ToggleComp tableBody={this.renderTableBody} />
+          </div>
+          <div className="tableWidth">
+            {this.state.renderNewForm && (
+              <CreateNewVendor addButton={this.addButton} />
+            )}
+          </div>
         </div>
-        <ToggleComp
-          data={this.state.dataObj}
-          tableBody={this.renderTableBody()}
-        />
       </div>
     );
   }

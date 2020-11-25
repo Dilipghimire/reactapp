@@ -47,3 +47,13 @@
 .underline {
     text-decoration: underline;
 }
+
+.tableWidth {
+  width: 50vw;
+}
+
+.tableAndNewVendor {
+  display: flex;
+  flex-direction: row;
+  flex: auto;
+}

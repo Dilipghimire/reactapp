@@ -2,9 +2,6 @@ import React from "react";
 import { Table } from "reactstrap";
 
 const TableComp = (props) => {
- console.log('test', props)
-
-
   return (
     <Table>
       <thead>
@@ -14,7 +11,7 @@ const TableComp = (props) => {
           <th>Manager Name</th>
         </tr>
       </thead>
-      <tbody>{}</tbody>
+      <tbody>{props.tableBody()}</tbody>
     </Table>
   );
 };

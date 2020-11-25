@@ -17,7 +17,7 @@ const ToggleComp = (props) => {
       <Collapse isOpen={isOpen}>
         <Card>
           <CardBody>
-            <TableComp />
+            <TableComp data={props.data} tableBody={props.tableBody} />
           </CardBody>
         </Card>
       </Collapse>
