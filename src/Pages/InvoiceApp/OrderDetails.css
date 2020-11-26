@@ -1,0 +1,10 @@
+.orderSize {
+  display: flex;
+  flex-direction: column;
+  width: 10%;
+}
+
+
+.sizeButtonhandle {
+    margin-bottom: 10px;
+}

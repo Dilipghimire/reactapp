@@ -6,6 +6,7 @@ import InitialPage from "../InvoiceApp/logIn";
 import CreateNewVendor from "./CreateNewVendor";
 import PopUpModal from "../../Component/Modals/PopUpModals";
 import ToggleComp from "../../Component/Toggle/Toggle";
+import OrderDetails from './OrderDetails'
 
 //css
 
@@ -94,9 +95,12 @@ class InvoiceApp extends React.Component {
     return (
       this.state.inputValue &&
       this.state.namePut && (
-        <a href="#" className="underline">
+        <button
+          className="underline ButtonButLinkStyle"
+          onClick={() => console.log("hello")}
+        >
           {this.state.namePut}
-        </a>
+        </button>
       )
     );
   };
@@ -140,7 +144,6 @@ class InvoiceApp extends React.Component {
   };
 
   render() {
-    console.log("tes", this.state.renderNewForm);
     return (
       <div>
         <div>
@@ -181,7 +184,9 @@ class InvoiceApp extends React.Component {
               <CreateNewVendor addButton={this.addButton} />
             )}
           </div>
+         
         </div>
+        <OrderDetails />
       </div>
     );
   }
