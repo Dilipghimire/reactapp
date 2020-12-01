@@ -40,13 +40,6 @@ class InvoiceApp extends React.Component {
     });
   };
 
-  //return true or false
-  checkIfVendorExists = () => {
-    const inputName = document.getElementById("searchText").value;
-    this.setState({
-      checkVendorExistence: this.state.dataObj.hasOwnProperty(inputName),
-    });
-  };
 
   //Add Vendor in FireBase DataBase
   addVendor = () => {
