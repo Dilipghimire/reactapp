@@ -4,11 +4,6 @@ import "../InvoiceApp/OrderDetails.css";
 import { Table } from "reactstrap";
 
 class OrderDetails extends React.Component {
-  state = {
-    amount: [],
-    qty: 0,
-  };
-
   mapping = {
     "4R": 10,
     "5R": 15,
@@ -18,12 +13,26 @@ class OrderDetails extends React.Component {
     "12R": 35,
   };
 
-  totalCalculation = (e) => {
+  totalCalculation = (e, index) => {
     const ID = e.target.id;
     const getPerSizeAmount = this.mapping[ID];
     const getQuantity = e.target.value;
-    document.getElementById("total-value" + ID).value =
-      getPerSizeAmount * getQuantity;
+
+    //populate total field for each row
+    const total = (document.getElementById("total-value" + ID).value =
+      getPerSizeAmount * getQuantity);
+
+     //get Grand subTotal 
+    let totalFields = document.querySelectorAll(".total-value");
+    let grandTotal = 0;
+    for (let i = 0; i < totalFields.length; i++) {
+      grandTotal += Number(totalFields[i].value);
+    }
+   
+    //assign value to grandTotal/ subTotal
+    document.getElementById('productSubTotal').value = grandTotal
+
+
   };
 
   render() {
@@ -40,12 +49,11 @@ class OrderDetails extends React.Component {
           </tr>
         </thead>
         <tbody>
-          {OrderDetailsDictionary.map((item) => (
+          {OrderDetailsDictionary.map((item, index) => (
             <tr>
               <th scope="row">{item.size}</th>
               <td>
                 <input
-                  type="test"
                   className="quantity-box"
                   id={item.size}
                   onKeyUp={this.totalCalculation}
@@ -55,13 +63,17 @@ class OrderDetails extends React.Component {
               <td>{item.cost}</td>
               <td>=</td>
               <td>
-                <input id={"total-value" + item.size}></input>
+                <input
+                  className="total-value"
+                  id={"total-value" + item.size}
+                ></input>
               </td>
             </tr>
           ))}
           <tr className="subTotal">
             <td>
-              product Subtotal <input></input>
+              Product Subtotal{" "}
+              <input id="productSubTotal"></input>
             </td>
           </tr>
         </tbody>
